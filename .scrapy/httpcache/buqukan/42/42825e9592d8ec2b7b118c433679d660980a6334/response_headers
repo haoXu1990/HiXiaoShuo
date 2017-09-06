@@ -1,0 +1,15 @@
+Timing-Allow-Origin: *
+Vary: Accept-Encoding
+X-Swift-Cachetime: 180
+Server: Tengine
+X-Swift-Savetime: Fri, 01 Sep 2017 04:13:27 GMT
+Via: cache2.l2st4-2[338,200-0,M], cache7.l2st4-2[347,0], kunlun9.cn29[426,200-0,M], kunlun9.cn29[426,0]
+X-Powered-By: PHP/7.0.12
+X-Powered-By: ASP.NET
+Last-Modified: Thu, 13 Jul 2017 04:29:18 GMT
+Etag: W/"1499920158"
+Eagleid: 7437f19315042392073611970e
+Content-Type: text/html; charset=gbk
+X-Cache: MISS TCP_MISS dirn:-2:-2
+Content-Encoding: gzip
+Date: Fri, 01 Sep 2017 04:13:27 GMT

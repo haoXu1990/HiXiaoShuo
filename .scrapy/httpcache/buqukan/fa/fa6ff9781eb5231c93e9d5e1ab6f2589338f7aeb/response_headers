@@ -1,0 +1,14 @@
+Content-Encoding: gzip
+Timing-Allow-Origin: *
+Date: Thu, 31 Aug 2017 09:27:54 GMT
+Eagleid: 7437f18615041718032098350e
+Via: cache18.l2st4-2[0,200-0,H], cache11.l2st4-2[1,0], kunlun6.cn29[45,200-0,M], kunlun6.cn29[52,0]
+X-Cache: MISS TCP_REFRESH_MISS dirn:0:422215492
+Vary: Accept-Encoding
+X-Powered-By: PHP/7.0.12
+X-Powered-By: ASP.NET
+X-Swift-Savetime: Thu, 31 Aug 2017 09:30:03 GMT
+X-Swift-Cachetime: 180
+Age: 129
+Content-Type: text/html; charset=gbk
+Server: Tengine

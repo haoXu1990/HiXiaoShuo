@@ -18,14 +18,17 @@ db = pymysql.connect(host=MYSQL_HOSTS,
 
 class Sql:
     @classmethod
-    def insert_dd_name(cls, book_name, book_author, book_url, book_staus, book_TotalNumber, book_category, lastTime):
-
+    def insert_dd_name(cls, book_name, book_author, book_url, book_category, book_abstract, book_updatime, book_newChapterName, \
+                       book_newChapterUrl,book_imageUrl, book_ID ):
         try:
             with db.cursor() as cursor:
-                 sql = "INSERT INTO `buqukan` (`book_name`, `book_author`, `book_url`, `book_staus`,\
-                 `book_category`, `lastTime`, `book_TotalNumber`) VALUES (%s, %s, %s, %s,%s, %s, %s)"
 
-                 cursor.execute(sql, (book_name, book_author, book_url, book_staus, book_category, lastTime, book_TotalNumber))
+                 sql = "INSERT INTO `hixiaoshuo` (`book_name`, `book_author`, `book_url`, `book_category`,\
+                 `book_abstract`, `book_updatime`, `book_newChapterName`, `book_newChapterUrl`, `book_imageUrl`, `book_id`)\
+                  VALUES (%s, %s, %s, %s,%s, %s, %s,%s, %s, %s)"
+
+                 cursor.execute(sql, (book_name, book_author, book_url, book_category, book_abstract, book_updatime, book_newChapterName, \
+                                      book_newChapterUrl,book_imageUrl,book_ID))
                  # 执行sql语句
                  db.commit()
                  print(sql)
@@ -39,31 +42,43 @@ class Sql:
         #db.close()
 
     @classmethod
-    def update_name(cls, book_name, book_author, book_url, book_staus, book_TotalNumber, book_category, lastTime):
+    def update_name(cls, book_name, book_author, book_url, book_category, book_abstract, book_updatime, book_newChapterName, \
+                       book_newChapterUrl,book_imageUrl, book_ID ):
         try:
             with db.cursor() as cursor:
-                sql = "UPDATE `buqukan` SET `book_author`=%s, `book_url` = %s, `book_staus`=%s, \
-                 `book_TotalNumber`=%s, `book_category`=%s, `lastTime`= %s WHERE `book_name`=%s"
-                cursor.execute(sql, (book_author, book_url, book_staus,book_TotalNumber,book_category,lastTime, book_name))
+                # sql = "UPDATE `buqukan` SET `book_author`=%s, `book_url` = %s, `book_staus`=%s, \
+                #  `book_TotalNumber`=%s, `book_category`=%s, `lastTime`= %s
+
+                sql = "UPDATE `hixiaoshuo` SET `book_name`=%s, `book_author`=%s, `book_url`=%s, `book_category`=%s,\
+                                 `book_abstract`=%s, `book_updatime`=%s, `book_newChapterName`=%s, `book_newChapterUrl`=%s,\
+                                  `book_imageUrl`=%s, `book_id`=%s  WHERE `book_name`=%s"
+
+                cursor.execute(sql, (
+                book_name, book_author, book_url, book_category, book_abstract, book_updatime, book_newChapterName, \
+                book_newChapterUrl, book_imageUrl, book_ID,book_name ))
                 db.commit()
+                print('update success')
         except:
             db.rollback()
             print('Error: update error')
 
 
     @classmethod
-    def select_name(cls, book_name):
+    def select_name(cls, book_name, book_author):
         print('检查书名: ' + book_name)
         try:
             with db.cursor() as cursor:
-                sql = "SELECT * FROM `buqukan` WHERE `book_name`=%s"
+                sql = "SELECT * FROM `hixiaoshuo` WHERE `book_name`=%s AND `book_author`=%s"
                 #执行SQL语句
-                #cursor.execute(sql, ('aaa', ))
-                cursor.execute(sql, book_name)
+                cursor.execute(sql, (book_name, book_author))
                 # 获取所有记录列表
-                result = cursor.fetchall()[0]
-                #print(result)
-                return result['book_name'] == book_name
+                result = cursor.fetchone()
+                if result != None:
+                    print('数据库中存在' + book_author + '作者写的：' + book_name)
+                    return 1
+                else:
+                    print('数据库中没有存储' + book_author + '作者写的：' + book_name)
+                    return 0
         except:
             print("Error: unable to fetch data")
            # db.close()

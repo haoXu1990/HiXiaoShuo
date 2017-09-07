@@ -38,3 +38,26 @@ class DcontentItem(scrapy.Item):
     chapterurl = scrapy.Field()
     #章节URL
     chaptername = scrapy.Field()
+
+
+class BookDescItem(scrapy.Item):
+    # 小说名字
+    book_name = scrapy.Field()
+    # 小说作者
+    book_author = scrapy.Field()
+    # 小说URL
+    book_url = scrapy.Field()
+    # 小说类别
+    book_category = scrapy.Field()
+    # 小说ID
+    book_ID = scrapy.Field()
+    #小说简介
+    book_abstract = scrapy.Field()
+    #小说最新更新时间
+    book_updatime = scrapy.Field()
+    #小说最新章节名称
+    book_newChapterName = scrapy.Field()
+    #小说最新章节URL
+    book_newChapterUrl = scrapy.Field()
+    #小说封面图片URL
+    book_imageUrl = scrapy.Field()

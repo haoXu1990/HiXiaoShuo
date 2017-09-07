@@ -1,24 +1,39 @@
 from  .sql import Sql
-from  buqukan.items import BuqukanItem
+from  buqukan.items import BookDescItem
 
 class BuqukanPipeline(object):
 
     def process_item(self, item, spider):
-        if isinstance(item, BuqukanItem):
-            name = item['book_name']
-            ret = Sql.select_name(name)
+        if isinstance(item, BookDescItem):
+
             book_name = item['book_name']
-            book_author = item['book_author']
+            # 小说作者
+            book_author =item['book_author']
+            # 小说URL
             book_url = item['book_url']
-            book_staus = item['book_status']
-            book_TotalNumber = item['book_TotalNumber']
+            # 小说类别
             book_category = item['book_category']
-            lastTime = item['lastTime']
+            # 小说ID
+            book_ID = item['book_ID']
+            # 小说简介
+            book_abstract = item['book_abstract']
+            # 小说最新更新时间
+            book_updatime = item['book_updatime']
+            # 小说最新章节名称
+            newchapterName = item['book_newChapterName']
+            # 小说最新章节URL
+            newchapterUrl = item['book_newChapterUrl']
+            # 小说封面图片URL
+            book_imageUrl = item['book_imageUrl']
+
+            ret = Sql.select_name(book_name, book_author)
 
             #如果存在更新数据库
             if ret == 1:
-                Sql.update_name(book_name, book_author, book_url, book_staus,book_TotalNumber, book_category, lastTime)
+                Sql.update_name(book_name, book_author, book_url, book_category, book_abstract, book_updatime, newchapterName, \
+                                   newchapterUrl,book_imageUrl, book_ID )
             else:
-                Sql.insert_dd_name(book_name, book_author, book_url, book_staus,book_TotalNumber, book_category, lastTime)
+                Sql.insert_dd_name(book_name, book_author, book_url, book_category, book_abstract, book_updatime, newchapterName, \
+                                   newchapterUrl,book_imageUrl, book_ID )
                 print('开始存储小说信息' + '\n')
-     #   return item
+

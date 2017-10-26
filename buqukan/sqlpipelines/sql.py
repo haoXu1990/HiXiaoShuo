@@ -31,7 +31,7 @@ class Sql:
                                       book_newChapterUrl,book_imageUrl,book_ID))
                  # 执行sql语句
                  db.commit()
-                 print(sql)
+                # print(sql)
                  print('insert data success')
         except:
             # 发生错误时回滚
@@ -46,9 +46,6 @@ class Sql:
                        book_newChapterUrl,book_imageUrl, book_ID ):
         try:
             with db.cursor() as cursor:
-                # sql = "UPDATE `buqukan` SET `book_author`=%s, `book_url` = %s, `book_staus`=%s, \
-                #  `book_TotalNumber`=%s, `book_category`=%s, `lastTime`= %s
-
                 sql = "UPDATE `hixiaoshuo` SET `book_name`=%s, `book_author`=%s, `book_url`=%s, `book_category`=%s,\
                                  `book_abstract`=%s, `book_updatime`=%s, `book_newChapterName`=%s, `book_newChapterUrl`=%s,\
                                   `book_imageUrl`=%s, `book_id`=%s  WHERE `book_name`=%s"
@@ -69,16 +66,22 @@ class Sql:
         try:
             with db.cursor() as cursor:
                 sql = "SELECT * FROM `hixiaoshuo` WHERE `book_name`=%s AND `book_author`=%s"
+
+                #这里要对Book_name, book_author 出去掉空格、回车、换行等符号在做出比较
+
                 #执行SQL语句
                 cursor.execute(sql, (book_name, book_author))
                 # 获取所有记录列表
+
                 result = cursor.fetchone()
-                if result != None:
+
+                if result == None:
+                    print('数据库中没有存储' + book_author + '作者写的：' + book_name)
+
+                    return 0
+                else:
                     print('数据库中存在' + book_author + '作者写的：' + book_name)
                     return 1
-                else:
-                    print('数据库中没有存储' + book_author + '作者写的：' + book_name)
-                    return 0
         except:
             print("Error: unable to fetch data")
            # db.close()

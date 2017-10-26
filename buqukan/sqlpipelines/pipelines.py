@@ -30,10 +30,12 @@ class BuqukanPipeline(object):
 
             #如果存在更新数据库
             if ret == 1:
+                print('开始更新小说信息' + '\n')
                 Sql.update_name(book_name, book_author, book_url, book_category, book_abstract, book_updatime, newchapterName, \
                                    newchapterUrl,book_imageUrl, book_ID )
             else:
+                print('开始存储小说信息' + '\n')
                 Sql.insert_dd_name(book_name, book_author, book_url, book_category, book_abstract, book_updatime, newchapterName, \
                                    newchapterUrl,book_imageUrl, book_ID )
-                print('开始存储小说信息' + '\n')
+
 
